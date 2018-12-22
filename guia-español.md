@@ -12,7 +12,7 @@ Guia de creación de un servidor Raspberry Pi Zero en español.
 Antes de empezar con la creación del servidor tenemos que instalar el sistema operativo. Aunque [existen varias alternativas](https://www.raspberrypi.org/downloads/) yo usaré la distro oficial Raspbian.
 
 ### ➡️ Instalación del sistema operativo:
-La podemos descargar Raspbian directamente des de [aqui](https://www.raspberrypi.org/downloads/raspbian/).
+Podemos descargar Raspbian directamente des de [aqui](https://www.raspberrypi.org/downloads/raspbian/).
 La instalación no tiene secreto, descargamos la imagen que queramos y usamos los [pasos proporcionados](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) en la pagina oficial. 
 
 > -   Download  [Etcher](https://etcher.io/)  and install it.
