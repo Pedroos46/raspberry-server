@@ -275,14 +275,59 @@ Este software suele actualizarse con frecuencia y considero que ya hay buenas gu
 
 
 ## 4. Abriendo el servidor. 
-En este apartado abriremos nuestro dispositivo al mundo para poder acceder  a nuestra pagina web o a nuestro servidor desde cualquier parte del mundo. Este punto puede ser obviado si solo queremos un servidor local. 
+En este apartado abriremos nuestro dispositivo al mundo para poder acceder a nuestra pagina web o a nuestro servidor desde cualquier parte.
 
-### ➡️ DnsDynamic. 
+Este punto puede ser obviado si solo queremos un servidor local. 
+
+Usaremos un dominio gratuito y el servicio [**Dyndns**](https://es.wikipedia.org/wiki/DNS_din%C3%A1mico) nos facilita el poder tener un nombre de dominio asignado a una IP pública dinámica. El procedimiento seria similar con un dominio propio también.
 
 ### ➡️ No-IP. 
+En mi caso usaré uno dominio gratuito de [No-IP](https://www.noip.com/) .
+
+❗️ No-IP ofrece servicios de pago. Yo usaré solo en plan **Free Dynamic DNS** el cual me permite tener hasta 3 dominos de forma gratuita, aunque no personalizados. 
+
+❗️ En caso de tener un dominio propio este tendría que ser transferido a No-IP. También se pueden comprar dominios mediante ellos. Todas estas gestiones están sujetas a cobros, de la misma forma que lo esta el gestor de correo, los certificados SSL, backups, etc.
+
+**Como funciona Dyndns:** El servicio Dyndns se suele utilizar sobre todo para asociar unos servicios o puertos de un equipo de nuestra red con un nombre de dominio;
+
+El funcionamiento no tiene secreto, básicamente se asocia el **nombre de dominio** a la **IP pública dinámica** que tenemos. Instalamos un cliente de actualización, que notifica los cambios de la **IP pública** al servidor de nombre de dominio, para que el nombre de dominio actualice siempre la IP pública a la que está asociado.
+
+De esta forma podremos acceder desde fuera de la red al equipo de nuestra red interna que se asocia a ese nombre de dominio. 
+
+#### Pasos: 
+Lo primero que tenemos que hacer es dirigirnos a la [página](https://www.noip.com/) de No-IP i registrarnos. Una vez tengamos nuestra cuenta creada y accedamos al panel de nuestra cuenta (en dashboard) veremos un widget llamado "Quick Add". 
+
+Podemos elegir el dominio y el hostname que queramos siempre que este disponible. Este hostname y dominio será la futura URL que introduciremos en nuestro navegador para acceder al servidor apache que hemos instalando anteriormente. 
+
+También será el hostname que usaremos para establecer las conexiones SSH en caso de que no estemos en casa. Ya que recuerdo que esta URL corresponderá a la IP publica de nuestra Raspberry. 
+
+Una vez tengamos el hostname creado, podemos proceder a la instalación del servicio Dyndns. Yo usare el cliente Dyndns que proporciona No-IP. 
+
+Las instrucciones las encontramos en [Dynamic Update Client](https://my.noip.com/#!/dynamic-dns/duc)   dentro del apartado **Dynamic DNS**
+
+Los pasos son bastante simples: 
+
+> 1.  Download the DUC and save the file to:  /usr/local/src
+>
+> 2.  Open terminal and execute the following:
+    -   cd /usr/local/src
+    -   tar xzf noip-duc-linux.tar.gz
+    -   cd no-ip-2.1.9
+    -   make
+    -   make install
+ >   
+> 3.  Create the configuration file:  /usr/local/bin/noip2 -C
+>4.  You will be prompted to enter your username and password for No-IP, and for the hostnames you wish to update.
+>
+>5.  Launch the DUC:  /usr/local/bin/noip2
 
 
-http://pastebin.com/GLdMWbz7
+❗️ Asegurarse que tenemos **acceso al panel de control de router** para la redirección de puertos.  
+
+Para acceder al router generalmente tenemos que teclear en el navegador la IP del router, podemos usar otra vez el escanner de IPs o Fing para saber cual es. 
+
+
+🚀
 
 ## 5. VPN, FTP, etc.
 https://www.sitepoint.com/setting-up-a-home-vpn-using-your-raspberry-pi/
