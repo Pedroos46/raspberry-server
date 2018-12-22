@@ -78,10 +78,10 @@ Para hacerlo necesitamos **el usuario** de nuestro servidor, en el caso de la Ra
 	ssh [usuario]@[ip o hostname]
 Por lo tanto:s
 
-    shh pi@[ip]
+    ssh pi@[ip]
     password: raspberry
     
-Una vez realizada la conexión i el login podremos actuar como si estubieramos en el propio dispositivo.
+Una vez realizada la conexión y el login podremos actuar como si estubieramos en el propio dispositivo.
 
 
 ## 2. Recomendaciones: 
@@ -113,12 +113,14 @@ Nota:  Normalmene `wlan0` es la interfaz  que se usa con conexión wifi. Si nues
 
 Para más información y para otra versiones de Linux se puede vistar la siguiente [pàgina](https://www.linode.com/docs/networking/linux-static-ip-configuration).
 
-Una vez lo tengamos, reiniciamos nuestro servidor y ya deberia empezar a trabajar con la nueva IP estatica. 
+Una vez lo tengamos, reiniciamos nuestra placa y ya deberia empezar a trabajar con la nueva IP estatica. 
+
+	sudo reboot now
 
 
 ### ➡️ Mejorar el rendimiento:
 
-La idea es tener trabajando la Raspberry sin necesidad de supervisión y sin ningún periférico conectado.  Por lo tanto, podriamos reducir la cantidad de recursos que destinamos al procesamiento gráfico e incluso desactivar la interfaz. 
+La idea es tener trabajando la Raspberry sin necesidad de supervisión y sin ningún periférico conectado. Por lo tanto, podriamos reducir la cantidad de recursos que destinamos al procesamiento gráfico e incluso desactivar la interfaz. 
 
 Para empezar lanzaremos el asistente de configuración de Raspbian.
 
