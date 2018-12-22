@@ -4,6 +4,9 @@ Guia hecha por mi y para mi sobre como armar y configurar una Raspberry Zero com
 
 
 Disponible en:
-[🇪🇸Español](https://github.com/Pedroos46/raspberry-server/blob/master/guia-espa%C3%B1ol.md)  
+
+[🇪🇸Español](https://github.com/Pedroos46/raspberry-server/blob/master/guia-espa%C3%B1ol.md) 
+
 🐈Català
+
 🇬🇧English
