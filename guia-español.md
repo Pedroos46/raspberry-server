@@ -11,7 +11,7 @@ Guia de creación de un servidor Raspberry Pi Zero español, catalán e Inglés.
 ## 1. Preparación: 
 Antes de empezar con la creación del servidor tenemos que instalar el sistema operativo. Aunque [existen varias alternativas](https://www.raspberrypi.org/downloads/) yo usaré la distro oficial Raspbian.
 
-### Instalación del sistema operativo:
+### ➡️Instalación del sistema operativo:
 La podemos descargar Raspbian directamente des de [aqui](https://www.raspberrypi.org/downloads/raspbian/).
 La instalación no tiene secreto, descargamos la imagen que queramos y usamos los [pasos proporcionados](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) en la pagina oficial. 
 
@@ -21,7 +21,7 @@ La instalación no tiene secreto, descargamos la imagen que queramos y usamos lo
 > -  Select the SD card you wish to write your image to.
 > -   Review your selections and click 'Flash!' to begin writing data to the SD card.
 
-### Configuración inicial: 
+### ➡️Configuración inicial: 
 
 Una vez instalado el sistema operativo empezaremos con las configuraciones.
 En este punto nos interesa principalmente tener la conexión wifi configurada y el SSH habilitado.
@@ -90,7 +90,7 @@ Una vez realizada la conexión i el login podremos actuar como si estubieramos e
 
 ## 2. Recomendaciones: 
 
-### Asignar una IP local estatica:
+### ➡️Asignar una IP local estatica:
 Muy recomendado  ✅
 
 Una vez tengamos nuestro dispositivo arrancado y conectado a la red local es muy recomendable que poner nuestra IP local estatica. El motivo por el cual hacemos esto es porque mas tarde, desde el router, vamos a apuntar la IP de nuestro futuro servidor por lo que necesitamos que esa IP no cambie nunca. 
@@ -120,7 +120,7 @@ Para más información y para otra versiones de Linux se puede vistar la siguien
 Una vez lo tengamos, reiniciamos nuestro servidor y ya deberia empezar a trabajar con la nueva IP estatica. 
 
 
-### Mejorar el rendimiento:
+### ➡️Mejorar el rendimiento:
 
 La idea es tener trabajando la Raspberry sin necesidad de supervisión y sin ningún periférico conectado.  Por lo tanto, podriamos reducir la cantidad de recursos que destinamos al procesamiento gráfico e incluso desactivar la interfaz. 
 
@@ -146,7 +146,7 @@ Posteriormente le reduciremos la memoria a la GPU asignadole `16`.
  	Advanced options > Memory Split. 
 	
  
-### Crear un nuevo usuario y eliminar el usuario por defecto:
+### ➡️Crear un nuevo usuario y eliminar el usuario por defecto:
 
 Recomendado ✅
 
@@ -171,7 +171,7 @@ Una vez dentro eliminaremos el usario por defecto y todos sus datos. En el caso 
 	sudo userdel -r -f pi
 
 
-### Actualizando el sistema operativo:
+### ➡️Actualizando el sistema operativo:
 
 Otro punto importante de seguridad es mantener el sistema operativo actualizado, de esta forma nos protegemos de los últimos fallos de seguridad.
 
@@ -185,7 +185,7 @@ Este proceso puede tardar un rato. Cuando haya terminado reinciamos nuestro serv
 
 	sudo reboot now
     
-### Certificados de autenticación en SSH:
+### ➡️Certificados de autenticación en SSH:
  Comodo 🔑
  
 En este punto queremos establecer conexiones SSH sin necesidad de introducir la contraseña.  Para ello crearemos certificados de autenticación y los intercambiaremos entre los dos dispositivos. 
@@ -207,7 +207,7 @@ Nos dirigimos mediante comandos (o abrimos un terminal nuevo) a la carpeta donde
 
 De esta forma nuestra llave del dispositivo reside en el dispositivo receptor, por lo que ya no hará falta hacer uso de la contraseña.
 
-### Desactivar conexiones con root via SSH:
+### ➡️Desactivar conexiones con root via SSH:
 
 Deshabilitaremos las conexiones a root via SSH por motivos de seguridad, para hacerlo modificaremos el archivo de configuracion de SSH (`ssh_config`) alojado en esta direccion:
 
@@ -230,7 +230,7 @@ Guardamos y reiniciamos el servicio SSH.
   
     $ sudo service ssh restart
 
-### Firewall y Fail2Ban:
+### ➡️Firewall y Fail2Ban:
 
 Otra configuración extra que podemos habilitar es el Fail2Ban.
 
@@ -279,9 +279,9 @@ Este software suele actualizarse con frecuencia y considero que ya hay buenas gu
 ## 4. Abriendo el servidor. 
 En este apartado abriremos nuestro dispositivo al mundo para poder acceder  a nuestra pagina web o a nuestro servidor desde cualquier parte del mundo. Este punto puede ser obviado si solo queremos un servidor local. 
 
-### DnsDynamic. 
+### ➡️DnsDynamic. 
 
-#### No-IP. 
+### ➡️No-IP. 
 
 
 http://pastebin.com/GLdMWbz7
