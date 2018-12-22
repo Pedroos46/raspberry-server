@@ -321,6 +321,15 @@ Los pasos son bastante simples:
 >
 >5.  Launch the DUC:  /usr/local/bin/noip2
 
+Para poder descargar el paquete: 
+
+![enter image description here](https://i.imgur.com/kLQzGQS.png)
+
+Y despues dirigiendonos a  tal i usando el comando Wget
+
+    wget https://www.noip.com/client/linux/noip-duc-linux.tar.gz
+pam
+	De esta forma via SSH TAL 
 
 ❗️ Asegurarse que tenemos **acceso al panel de control de router** para la redirección de puertos.  
 
