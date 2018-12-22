@@ -90,8 +90,6 @@ Una vez realizada la conexión i el login podremos actuar como si estubieramos e
 
 ## 2. Recomendaciones: 
 
-https://mattwilcox.net/web-development/setting-up-a-secure-home-web-server-with-raspberry-pi
-
 ### Asignar una IP local estatica:
 Muy recomendado  ✅
 
@@ -211,11 +209,11 @@ De esta forma nuestra llave del dispositivo reside en el dispositivo receptor, p
 
 ### Desactivar conexiones con root via SSH:
 
-Primero de todo **deshabilitaremos las conexiones a root via SSH.** Para hacerlo nos modificaremos el archivo de configuracion de SSH (`ssh_config`) alojado en esta direccion:
+Deshabilitaremos las conexiones a root via SSH por motivos de seguridad, para hacerlo modificaremos el archivo de configuracion de SSH (`ssh_config`) alojado en esta direccion:
 
 	cd /etc/ssh/
  
-Podemos usar `nano` para alterar el archivo y cambiar el `PermitRootLogin` por no. 
+Podemos usar `nano` para alterar el archivo y cambiar el `PermitRootLogin` por `no`. 
 
 	sudo nano sshd_config
   
@@ -244,28 +242,47 @@ Esta medida es completamente opcional y relativamente simple de implementar. Par
 
 Se podría decir que hasta ahora, del punto 1 al 2 todo lo que hemos hecho es una puesta apunto de nuestra placa. En este punto es cuando empezamos a montar el servidor, en este caso un servidor web basado en Apache en el cual podemos alojar paginas web. 
 
-Una vez tengamos todo configurado, empezaremos creando y configurando nuestro servidor. Como ya tenemos creado el servidor SSH, pasaremos a crear el servidor web y más adelante nos pondremos con la VPN. 
+Una vez tengamos todo configurado, empezaremos creando y configurando nuestro servidor. Como ya tenemos creado el servidor SSH, pasaremos a crear el servidor web.
 
 Una de las soluciones más conocidas para servidores es Web es Apache, que es el que voy a usar en esta guia. 
 
-Existen otras soluciones como NGINX que rinden mejor y consumen menos, pero que no son tan configurables ni faciles de instalar en deteminadas maquinas, aunque en determinados entornos son mas recomendables que Apache. 
+Existen otras soluciones como Nginx, pero que no son tan configurables ni faciles de instalar, aunque en determinados entornos son más recomendables que Apache. 
 
-Para instalar Apache usaremos el siguiente comando:  
+Antes de pasar a la instalación lo que haremos será crear el grupo "www-data". Para ello ejecutaremos los siguientes comandos:
+
+    sudo groupadd www-data
+	sudo usermod -a -G www-data www-data
+
+Una vez lo tengamos actualizamos e instalamos: 
 
 	sudo apt-get update
-    sudo apt-get install apache2 php5 libapache2-mod-php5
+    sudo apt-get install apache2
     sudo service apache2 restat
 
-Una vez lo tengamos instalado podemos para comprobar como nuestro servidor web esta funcionando insertamos la IP de nuestro servidor en el navegador de nuestro equipo. 
+Una vez lo tengamos instalado podemos para comprobar como nuestro servidor web esta funcionando insertando la IP de nuestro servidor en el navegador de nuestro equipo. 
 
-☢️Apache acepta muchas configuraciones y ofrece muchas posibilidades, como sitios virtuales, control de acceso, etc. Aún así la configuración de Apache es solo la punta del iceberg, dependiendo del proyecto que queramos llevar acabo vamos a necesitar instalar o configurar otro tipo de software: Bases de datos, discos o memorias externas, etc. 
+Esta conexión se realiza por defecto en el puerto 80.
 
+Hasta aquí ya tendríamos un gestor de conexiones HTTP y ya podríamos cagar paginas web. 
 
+Hoy en día Javascript es el lenguaje mas extendido para crear contenido dinámico en entornos web, ademas permite una buena separación de cliente-servidor. Aun así existen otras alternativas como **PHP**. 
 
-https://geekytheory.com/tutorial-raspberry-pi-crear-servidor-web/
+Por otro lado dependiendo del proyecto que queramos llevar acabo vamos a necesitar instalar o configurar otro tipo de software y hardware: Bases de datos, discos o memorias externas, etc. 
+
+**MySQL** y **PhpMyAdmin** suelen ser buenas alternativas. **MongoDB** es una buena solución para bases de datos escalables.
+
+Este software suele actualizarse con frecuencia y considero que ya hay buenas guias y foros donde explican su instalación. 
+
+☢️Apache acepta muchas configuraciones y ofrece muchas posibilidades, como sitios virtuales, control de acceso, etc. 
+
 
 ## 4. Abriendo el servidor. 
 En este apartado abriremos nuestro dispositivo al mundo para poder acceder  a nuestra pagina web o a nuestro servidor desde cualquier parte del mundo. Este punto puede ser obviado si solo queremos un servidor local. 
+
+### DnsDynamic. 
+
+#### No-IP. 
+
 
 http://pastebin.com/GLdMWbz7
 
@@ -275,3 +292,7 @@ https://www.sitepoint.com/setting-up-a-home-vpn-using-your-raspberry-pi/
 
 	sudo apt-get install openvpn easy-rsa
 http://carlini.es/crear-un-servidor-vpn-en-una-raspberry-pi/
+
+
+
+
