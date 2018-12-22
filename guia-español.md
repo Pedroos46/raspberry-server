@@ -120,7 +120,7 @@ Para más información y para otra versiones de Linux se puede vistar la siguien
 Una vez lo tengamos, reiniciamos nuestro servidor y ya deberia empezar a trabajar con la nueva IP estatica. 
 
 
-### ➡️Mejorar el rendimiento:
+### ➡️ Mejorar el rendimiento:
 
 La idea es tener trabajando la Raspberry sin necesidad de supervisión y sin ningún periférico conectado.  Por lo tanto, podriamos reducir la cantidad de recursos que destinamos al procesamiento gráfico e incluso desactivar la interfaz. 
 
@@ -146,7 +146,7 @@ Posteriormente le reduciremos la memoria a la GPU asignadole `16`.
  	Advanced options > Memory Split. 
 	
  
-### ➡️Crear un nuevo usuario y eliminar el usuario por defecto:
+### ➡️ Crear un nuevo usuario y eliminar el usuario por defecto:
 
 Recomendado ✅
 
@@ -193,7 +193,7 @@ En este punto queremos establecer conexiones SSH sin necesidad de introducir la 
 Primero de todo crearemos una clave RSA:
 
     ssh-keygen -t rsa
-![](https://i.imgur.com/L84tqLS.png)
+![](https://i.imgur.com/QF14MXD.png)
 
 Seguidamente creamos una carpeta en el dispositivo receptor.
 
