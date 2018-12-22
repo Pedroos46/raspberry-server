@@ -273,13 +273,18 @@ Este software suele actualizarse con frecuencia y considero que ya hay buenas gu
 
 ☢️Apache acepta muchas configuraciones y ofrece muchas posibilidades, como sitios virtuales, control de acceso, etc. 
 
-
 ## 4. Abriendo el servidor. 
 En este apartado abriremos nuestro dispositivo al mundo para poder acceder a nuestra pagina web o a nuestro servidor desde cualquier parte.
 
 Este punto puede ser obviado si solo queremos un servidor local. 
 
 Usaremos un dominio gratuito y el servicio [**Dyndns**](https://es.wikipedia.org/wiki/DNS_din%C3%A1mico) nos facilita el poder tener un nombre de dominio asignado a una IP pública dinámica. El procedimiento seria similar con un dominio propio también.
+
+**Como funciona Dyndns:** El servicio Dyndns se usa para asociar unos servicios o puertos de un equipo de nuestra red con un nombre de dominio.
+
+> Básicamente se asocia el **nombre de dominio** a la **IP pública dinámica** que tenemos. Instalamos un cliente de actualización, que notifica los cambios de la **IP pública** al servidor de nombre de dominio, para que el nombre de dominio actualice siempre la IP pública a la que está asociado.
+
+De esta forma podremos acceder desde fuera de la red al equipo de nuestra red interna que se asocia a ese nombre de dominio. 
 
 ### ➡️ No-IP. 
 En mi caso usaré uno dominio gratuito de [No-IP](https://www.noip.com/) .
@@ -288,18 +293,15 @@ En mi caso usaré uno dominio gratuito de [No-IP](https://www.noip.com/) .
 
 ❗️ En caso de tener un dominio propio este tendría que ser transferido a No-IP. También se pueden comprar dominios mediante ellos. Todas estas gestiones están sujetas a cobros, de la misma forma que lo esta el gestor de correo, los certificados SSL, backups, etc.
 
-**Como funciona Dyndns:** El servicio Dyndns se suele utilizar sobre todo para asociar unos servicios o puertos de un equipo de nuestra red con un nombre de dominio;
-
-El funcionamiento no tiene secreto, básicamente se asocia el **nombre de dominio** a la **IP pública dinámica** que tenemos. Instalamos un cliente de actualización, que notifica los cambios de la **IP pública** al servidor de nombre de dominio, para que el nombre de dominio actualice siempre la IP pública a la que está asociado.
-
-De esta forma podremos acceder desde fuera de la red al equipo de nuestra red interna que se asocia a ese nombre de dominio. 
 
 #### Pasos: 
 Lo primero que tenemos que hacer es dirigirnos a la [página](https://www.noip.com/) de No-IP i registrarnos. Una vez tengamos nuestra cuenta creada y accedamos al panel de nuestra cuenta (en dashboard) veremos un widget llamado "Quick Add". 
 
+![enter image description here](https://i.imgur.com/jZNCAWa.png)
+
 Podemos elegir el dominio y el hostname que queramos siempre que este disponible. Este hostname y dominio será la futura URL que introduciremos en nuestro navegador para acceder al servidor apache que hemos instalando anteriormente. 
 
-También será el hostname que usaremos para establecer las conexiones SSH en caso de que no estemos en casa. Ya que recuerdo que esta URL corresponderá a la IP publica de nuestra Raspberry. 
+También será el hostname que usaremos para establecer las conexiones SSH en caso de que no estemos en la red local de la Raspberry. Ya que, recuerdo, que esta URL corresponderá a la IP publica de nuestra Raspberry. 
 
 Una vez tengamos el hostname creado, podemos proceder a la instalación del servicio Dyndns. Yo usare el cliente Dyndns que proporciona No-IP. 
 
@@ -321,22 +323,55 @@ Los pasos son bastante simples:
 >
 >5.  Launch the DUC:  /usr/local/bin/noip2
 
-Para poder descargar el paquete: 
+Todos estos comandos tienen que ser ejecutados en el terminal en el que tengamos iniciada la conexión SSH con nuestra placa.
+
+Para descargar el paquete en nuestra Raspberry y no en nuestro ordenador. Podemos copiar el enlace de descarga y después usar el comando `wget`. 
 
 ![enter image description here](https://i.imgur.com/kLQzGQS.png)
 
-Y despues dirigiendonos a  tal i usando el comando Wget
+ Antes de ejecutar este comando seria interesante dirigirse en el directorio que se nos pide que se descargue para evitar luego tener que moverlo. 
+Por lo tanto: 
+ 
 
+    cd /usr/local/src
     wget https://www.noip.com/client/linux/noip-duc-linux.tar.gz
-pam
-	De esta forma via SSH TAL 
 
-❗️ Asegurarse que tenemos **acceso al panel de control de router** para la redirección de puertos.  
+De esta forma via SSH descargamos el paquete directamente en nuestra Raspberry y en el directorio que nos interesa. 
 
-Para acceder al router generalmente tenemos que teclear en el navegador la IP del router, podemos usar otra vez el escanner de IPs o Fing para saber cual es. 
+Existe también un video proporcionado por No-IP donde se puede seguir visualmente los pasos a seguir: 
 
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/8xp4kkbsZi0/0.jpg)](http://www.youtube.com/watch?v=8xp4kkbsZi0 "How to Download and Configure the No-IP Dynamic Update Client on Linux")
 
-🚀
+En caso de no tener `wget` instalado:
+
+    sudo apt-get install wget
+	
+Una vez terminado este proceso hay que proceder a abrir los puertos que nos interesan del router.  Para acceder al router generalmente tenemos que teclear en el navegador la IP del router, podemos usar otra vez el escanner de IPs o Fing para saber cual es. 
+
+❗️ Hay que asegurarse que tenemos **acceso al panel de control de router** para la redirección de puertos.  
+
+Una vez dentro del panel de control del router, nos dirigimos la opción que ponga **Port Forwarding**  o ** Redirección de Puertos**.
+
+Esta parte puede ser distinta según el router que estemos configurando. Pero básicamente lo que tenemos que hacer redireccionar los puertos, es decir: 
+
+Si nosotros hacemos una petición a nuestra IP publica por el puerto 80 (usando nuestro hostname)  esta cuando 'entre' será redirigida hacia la IP local en el puerto 80, esa IP local será la de nuestra Raspberry y el puerto 80, que es el puerto por defecto de navegación web, será escuchada por Apache.
+
+La configuración que nos encontraremos será algo parecido a esto: 
+
+![enter image description here](https://www.howtogeek.com/wp-content/uploads/2016/10/ximg_5817561cd906a.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.27Jtigz8-2.jpg)
+
+Los campos importantes a implementar son `Port From`, `IP Address` y `Port to`.  
+
+Como ya he dicho el puerto 80 suele ser el puerto por defecto de navegación por lo que si nos entra una conexión por el puerto 80 (`Port from` debemos redireccionarlo con `Port to` hacia la `IP Address` estática de nuestra Raspberry. 
+
+Lo mismo sucedería con las conexiones SSH que se realizan por el puerto 22.
+
+Tendría que quedarnos algo así: 
+
+!TO-DO: Afegir foto.
+
+Una vez configurado todo, nuestro servidor ya puede ser accesible desde de donde queramos 🚀.
+
 
 ## 5. VPN, FTP, etc.
 https://www.sitepoint.com/setting-up-a-home-vpn-using-your-raspberry-pi/
