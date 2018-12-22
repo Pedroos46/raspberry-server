@@ -47,7 +47,7 @@ Para **habilitar el SSH** crearemos en el mismo directorio "boot" un archivo lla
 
 Este archivo será eliminado al arrancar, pero habilita por defecto el servicio SSH. Una vez tengamos esto hecho podemos arrancar el sistema. 
 
-### Empezando con SSH
+### ➡️ Empezando con SSH
 
 Una vez iniciado el sistema lo primero que tenemos que saber es la IP que se le ha asignado para poder establecer conexión. 
 
