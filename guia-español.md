@@ -40,16 +40,12 @@ network={
     key_mgmt=WPA-PSK
 }
 ```
-Colocando este archivo aquí, Raspbian lo moverá  a **/etc/wpa_supplicant/** cuando el sistema arranque.
+Colocando este archivo aquí Raspbian lo moverá  a **/etc/wpa_supplicant/** cuando el sistema arranque.
 
 Para **habilitar el SSH** crearemos en el mismo directorio "boot" un archivo llamado **ssh** sin ninguna extensión. 
 ![enter image description here](https://i.imgur.com/UwIQnPL.png)
 
 Este archivo será eliminado al arrancar, pero habilita por defecto el servicio SSH. Una vez tengamos esto hecho podemos arrancar el sistema. 
-
-Ahora voy a exponer una forma alternativa de hacer estos pasos mediante terminal. 
-
-Ademas voy a incluir directamente el paso de asignación de IP estática, el cual es altamente recomendado. 
 
 ### Empezando con SSH
 
