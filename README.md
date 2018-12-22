@@ -1,2 +1,9 @@
-# rapsberry-server
-Guia feta per mi i per a mi. Sobre com configurar una Raspberry Zero com a servidor des de zero.  
+# Rapsberry Pi Zero Server
+Guia hecha por mi y para mi sobre como armar y configurar una Raspberry Zero como servidor.
+
+
+
+Disponible en:
+[🇪🇸Español](https://github.com/Pedroos46/raspberry-server/blob/master/guia-espa%C3%B1ol.md)  
+🐈Català
+🇬🇧English
