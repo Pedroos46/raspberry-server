@@ -350,23 +350,29 @@ Una vez terminado este proceso hay que proceder a abrir los puertos que nos inte
 
 ❗️ Hay que asegurarse que tenemos **acceso al panel de control de router** para la redirección de puertos.  
 
-Una vez dentro del panel de control del router, nos dirigimos la opción que ponga **Port Forwarding**  o ** Redirección de Puertos**.
+Una vez dentro del panel de control del router, nos dirigimos la opción que ponga **Port Forwarding**  o **Redirección de Puertos**.
 
-Esta parte puede ser distinta según el router que estemos configurando. Pero básicamente lo que tenemos que hacer redireccionar los puertos, es decir: 
-
-Si nosotros hacemos una petición a nuestra IP publica por el puerto 80 (usando nuestro hostname)  esta cuando 'entre' será redirigida hacia la IP local en el puerto 80, esa IP local será la de nuestra Raspberry y el puerto 80, que es el puerto por defecto de navegación web, será escuchada por Apache.
+Esta parte puede ser distinta según el router que estemos configurando. Pero básicamente lo que tenemos que hacer redireccionar los puertos.
 
 La configuración que nos encontraremos será algo parecido a esto: 
 
 ![enter image description here](https://www.howtogeek.com/wp-content/uploads/2016/10/ximg_5817561cd906a.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.27Jtigz8-2.jpg)
 
-Los campos importantes a implementar son `Port From`, `IP Address` y `Port to`.  
+El funcionamiento es simple. La conexiones que entren en un determinado puerto por `from` tienen que ser redirigidas hacia la `IP Address` de nuestra Raspberry, con el mismo puerto por `to`, siempre que este no haya sido configurado por otro, que no debería ser nuestro caso. 
 
-Como ya he dicho el puerto 80 suele ser el puerto por defecto de navegación por lo que si nos entra una conexión por el puerto 80 (`Port from` debemos redireccionarlo con `Port to` hacia la `IP Address` estática de nuestra Raspberry. 
+Ejemplo: 
+
+> Si nosotros hacemos una petición a nuestra IP publica por el puerto 80
+> (usando nuestro hostname) esta cuando 'entre' será redirigida hacia la
+> IP local en el puerto 80, esa IP local será la de nuestra Raspberry y
+> el puerto 80, que es el puerto por defecto de navegación web, será
+> escuchada por Apache.
+
+Como ya he dicho el puerto 80 suele ser el puerto por defecto de navegación por lo que si nos entra una conexión por el puerto 80 (`Port from`) debemos redireccionarlo con `Port to` hacia la `IP Address` estática de nuestra Raspberry. 
 
 Lo mismo sucedería con las conexiones SSH que se realizan por el puerto 22.
 
-Tendría que quedarnos algo así: 
+Por lo tanto tras configurar la conexiones web y las conexiones SSH tendría que quedarnos algo así: 
 
 !TO-DO: Afegir foto.
 
