@@ -1,3 +1,4 @@
+
 Guia de creación de un servidor Raspberry Pi Zero en español.
 
 ## Tabla de contenidos: 
@@ -30,7 +31,7 @@ La idea de esta configuración inicial es minimizar trabajo, si empezamos con es
 
 Para **configurar la conexión WiFi** nos dirigimos en el volumen "boot" de la tarjeta SD donde hayamos instalado el sistema. Una vez en la raiz del directorio creamos un archivo llamado **wpa_supplicant.conf**. 
 
-![Creamos el archivo wpa_supplicant.conf](https://i.imgur.com/KhmhpAz.png)
+![Creamos el archivo wpa_supplicant.conf](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/1.png)
 
 Este archivo debe contener los siguientes detalles: 
 ```bash
@@ -43,15 +44,19 @@ network={
 Colocando este archivo aquí Raspbian lo moverá  a **/etc/wpa_supplicant/** cuando el sistema arranque.
 
 Para **habilitar el SSH** crearemos en el mismo directorio "boot" un archivo llamado **ssh** sin ninguna extensión. 
-![enter image description here](https://i.imgur.com/UwIQnPL.png)
+![enter image description here](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/2.png)
 
 Este archivo será eliminado al arrancar, pero habilita por defecto el servicio SSH. Una vez tengamos esto hecho podemos arrancar el sistema. 
 
+Podemos usar el comando `touch` desde el terminal para agilizar la creación de los archivos.  Ejemplo:
+
+    touch ssh
+
 ### ➡️ Empezando con SSH
 
-Una vez iniciado el sistema lo primero que tenemos que saber es la IP que se le ha asignado para poder establecer conexión. 
+Una vez iniciada la Raspberry y el sistema lo primero que tenemos que saber es la IP que se le ha asignado para poder establecer conexión. 
 
-Podemos usar un escaner de red para obtenerla. Si no tenemos ninguna herramienta una simple [busqueda en Google](http://bfy.tw/LSCo) o en la tienda de apps. Yo usare una aplicación llamada `Fing`. 
+Podemos usar un escáner de red para obtenerla. Si no tenemos ninguna herramienta una simple [búsqueda en Google](http://bfy.tw/LSCo) o en la tienda de apps. Yo usare una aplicación llamada `Fing`. 
 
 Una vez tengamos la IP empezamos con SSH, para ello necesitamos un servidor SSH en nuestra Raspberry o placa (que ya hemos activado en pasos anteriores) y un cliente SSH en nuestro ordenador. 
 
@@ -71,9 +76,9 @@ Así que volvemos a intentar el commando `ssh`:
            [-S ctl_path] [-W host:port] [-w local_tun[:remote_tun]]
            [user@]hostname [command]
 
-Demomento solo realizaremos una simple conexión con el servidor. 
+De momento solo realizaremos una simple conexión con el servidor. 
 
-Para hacerlo necesitamos **el usuario** de nuestro servidor, en el caso de la Raspbery el usuario por defecto es `pi`, **la IP**  de nuestra placa y **la contraseña** del usuario, que en el caso de las Raspberry la contraseña por defecto para el usuario `pi` es `raspberry`.
+Para hacerlo necesitamos **el usuario** de nuestro servidor, en el caso de la Raspberry el usuario por defecto es `pi`, **la IP**  de nuestra placa y **la contraseña** del usuario, que en el caso de las Raspberry la contraseña por defecto para el usuario `pi` es `raspberry`.
 
 	ssh [usuario]@[ip o hostname]
 Por lo tanto:s
@@ -81,19 +86,22 @@ Por lo tanto:s
     ssh pi@[ip]
     password: raspberry
     
-Una vez realizada la conexión y el login podremos actuar como si estubieramos en el propio dispositivo.
+Una vez realizada la conexión y el login podremos actuar como si estuviéramos en el propio dispositivo.
 
+❗️A partir de este punto todo lo gestionaremos via SSH y el terminal. Podemos dejar la Raspberry en otro lado.
 
 ## 2. Recomendaciones: 
+
+Abrimos una conexión SSH con nuestra Raspberry con el usuario `pi` y ya podemos empezar aplicar los puntos que nos interesen. 
 
 ### ➡️ Asignar una IP local estatica:
 Muy recomendado  ✅
 
-Una vez tengamos nuestro dispositivo arrancado y conectado a la red local es muy recomendable que poner nuestra IP local estatica. El motivo por el cual hacemos esto es porque mas tarde, desde el router, vamos a apuntar la IP de nuestro futuro servidor por lo que necesitamos que esa IP no cambie nunca. 
+Una vez tengamos nuestro dispositivo arrancado y conectado a la red local es muy recomendable que poner nuestra IP local estática. El motivo por el cual hacemos esto es porque mas tarde, desde el router, vamos a apuntar la IP de nuestro futuro servidor por lo que necesitamos que esa IP no cambie nunca. 
 
-Para lograrlo nos dirigiremos a la seguiente ruta en nuestro sistema: `/etc/network/`
+Para lograrlo nos dirigiremos a la siguiente ruta en nuestro sistema: `/etc/network/`
 
-Dentro de la carpeta nos encontraremos con un archivo llamado `interfaces`. Lo primero que haremos con este archivo es hacer una copia por si cometemos algun error. Usaremos el comando `cp`:
+Dentro de la carpeta nos encontraremos con un archivo llamado `interfaces`. Lo primero que haremos con este archivo es hacer una copia por si cometemos algún error. Usaremos el comando `cp`:
 
 	sudo cp /etc/network/interfaces interfaces.copy
     
@@ -107,20 +115,20 @@ Deberemos añadir las lineas que hay más abajo. Es probable que `iface xxxx ine
       address 192.168.1.180
       gateway 192.168.1.1
       
-En donde pone `address` podremos la IP estatica que queremos. No estaría de más entrar en nuestro router para saber que rango de IPs podemos entrarle y cual es el `gateway` ya que esto suele estar sujeto al router que tengamos. 
+En donde pone `address` podremos la IP estática que queremos. No estaría de más entrar en nuestro router para saber que rango de IPs podemos entrarle y cual es el `gateway` ya que esto suele estar sujeto al router que tengamos. 
 
-Nota:  Normalmene `wlan0` es la interfaz  que se usa con conexión wifi. Si nuestra conexión es por ethernet normalmente la interficie es `eth0`. Siempre podemos mirar que interficie estamos usando con el comando `ifconfig`.
+Nota:  Normalmente `wlan0` es la interfaz  que se usa con conexión wifi. Si nuestra conexión es por ethernet normalmente la interfaz es `eth0`. Siempre podemos mirar que interfaz estamos usando con el comando `ifconfig`.
 
 Para más información y para otra versiones de Linux se puede vistar la siguiente [pàgina](https://www.linode.com/docs/networking/linux-static-ip-configuration).
 
-Una vez lo tengamos, reiniciamos nuestra placa y ya deberia empezar a trabajar con la nueva IP estatica. 
+Una vez lo tengamos, reiniciamos nuestra placa y ya debería empezar a trabajar con la nueva IP estática. 
 
 	sudo reboot now
 
 
 ### ➡️ Mejorar el rendimiento reasignando recursos:
 
-La idea es tener trabajando la Raspberry sin necesidad de supervisión y sin ningún periférico conectado. Por lo tanto, podriamos reducir la cantidad de recursos que destinamos al procesamiento gráfico e incluso desactivar la interfaz. 
+La idea es tener trabajando la Raspberry sin necesidad de supervisión y sin ningún periférico conectado. Por lo tanto, podríamos reducir la cantidad de recursos que destinamos al procesamiento gráfico e incluso desactivar la interfaz. 
 
 Para empezar lanzaremos el asistente de configuración de Raspbian.
 
@@ -139,7 +147,7 @@ El asistente es bastante visual aun así para desactivar la interfaz será algo 
  		
    	Boot options > Desktop / CLI > Console. 
         
-Posteriormente le reduciremos la memoria a la GPU asignadole `16`. 
+Posteriormente le reduciremos la memoria a la GPU asignándole `16`. 
  
  	Advanced options > Memory Split. 
 	
@@ -148,7 +156,7 @@ Posteriormente le reduciremos la memoria a la GPU asignadole `16`.
 
 Recomendado ✅
 
-Por motivos de seguridad no podemos dejar nuestro usario por defecto habilitado. Por lo que crearemos uno nuevo y lo eliminaremos:
+Por motivos de seguridad no podemos dejar nuestro usuario por defecto habilitado. Por lo que crearemos uno nuevo y lo eliminaremos:
 
 Para crearlos usaremos el siguiente comando, el cual contiene también los grupos de sistema al cual queremos que este. 
 
@@ -163,7 +171,7 @@ Una vez, creado el nuevo usuario cerramos la conexión SSH actual escribiendo `e
 
 	ssh NUEVO-USUARIO@[ip o hostname]
     
-Una vez dentro eliminaremos el usario por defecto y todos sus datos. En el caso de la Raspberry es `pi` por lo que si tenemos otro nombre de usuario por defecto hay poner dicho usuario. 
+Una vez dentro eliminaremos el usuario por defecto y todos sus datos. En este caso de la Raspberry es `pi` , si tenemos otro nombre de usuario hay poner dicho usuario. 
  
  	sudo deluser --remove-all-files pi	
 	sudo userdel -r -f pi
@@ -173,7 +181,7 @@ Una vez dentro eliminaremos el usario por defecto y todos sus datos. En el caso 
 
 Otro punto importante de seguridad es mantener el sistema operativo actualizado, de esta forma nos protegemos de los últimos fallos de seguridad.
 
-Los siguientes comandos actualizarán, no solo el software de nuestro dispositivo, si no también sus librerias y el propio sistema operativo. 
+Los siguientes comandos actualizarán, no solo el software de nuestro dispositivo, si no también sus librerías y el propio sistema operativo. 
 
 	sudo apt-get update
     sudo apt-get upgrade
@@ -183,15 +191,16 @@ Este proceso puede tardar un rato. Cuando haya terminado reinciamos nuestro serv
 
 	sudo reboot now
     
-### ➡️ Certificados de autenticación en SSH:
+### ➡️ Conexiones SSH sin contraseñas:
  Cómodo 🔑
  
-En este punto queremos establecer conexiones SSH sin necesidad de introducir la contraseña.  Para ello crearemos certificados de autenticación y los intercambiaremos entre los dos dispositivos. 
+En este punto queremos establecer conexiones SSH sin necesidad de introducir la contraseña.  Para ello **crearemos certificados de autenticación** y los intercambiaremos entre los dos dispositivos. 
 
 Primero de todo crearemos una clave RSA:
 
     ssh-keygen -t rsa -b 4096
-![](https://i.imgur.com/QF14MXD.png)
+    
+![](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/3.png)
 
 Seguidamente creamos una carpeta en el dispositivo receptor.
 
@@ -238,13 +247,14 @@ Esta medida es completamente opcional y relativamente simple de implementar. Par
 
 ## 3. Empezando a nivel local.
 
-Se podría decir que hasta ahora, del punto 1 al 2 todo lo que hemos hecho es una puesta apunto de nuestra placa. En este punto es cuando empezamos a montar el servidor, en este caso un servidor web basado en Apache en el cual podemos alojar paginas web. 
+➡️ Se podría decir que hasta ahora, del punto 1 al 2 todo lo que hemos hecho es una puesta apunto de nuestra placa. En este punto es cuando empezamos a montar el servidor, en este caso un servidor web basado en Apache en el cual podemos alojar paginas web. 
 
 Una vez tengamos todo configurado, empezaremos creando y configurando nuestro servidor. Como ya tenemos creado el servidor SSH, pasaremos a crear el servidor web.
 
 Una de las soluciones más conocidas para servidores es Web es Apache, que es el que voy a usar en esta guia. 
+😮Existen otras soluciones como Nginx, pero que no son tan configurables ni faciles de instalar, aunque en determinados entornos son más recomendables que Apache. 
 
-Existen otras soluciones como Nginx, pero que no son tan configurables ni faciles de instalar, aunque en determinados entornos son más recomendables que Apache. 
+Abrimos una conexión SSH con nuestra Raspberry con el usuario `pi`o `NUEVO-USUARIO` y ya podemos empezar con la instalación.
 
 Antes de pasar a la instalación lo que haremos será crear el grupo "www-data". Para ello ejecutaremos los siguientes comandos:
 
@@ -259,19 +269,18 @@ Una vez lo tengamos actualizamos e instalamos:
 
 Una vez lo tengamos instalado podemos para comprobar como nuestro servidor web esta funcionando insertando la IP de nuestro servidor en el navegador de nuestro equipo. 
 
-Esta conexión (HTTP) se realiza por defecto en el puerto 80. En caso de añadir un certificado SSL y tener una conexión HTTPS se haría por el puerto 443. 
+❗️ Esta conexión (HTTP) se realiza por defecto en el puerto 80. En caso de añadir un certificado SSL y tener una conexión HTTPS se haría por el puerto 443. 
 
 Hasta aquí ya tendríamos un gestor de conexiones HTTP y ya podríamos cagar paginas web. 
 
 Hoy en día Javascript es el lenguaje mas extendido para crear contenido dinámico en entornos web, ademas permite una buena separación de cliente-servidor. Aun así existen otras alternativas como **PHP**. 
 
-Por otro lado dependiendo del proyecto que queramos llevar acabo vamos a necesitar instalar o configurar otro tipo de software y hardware: Bases de datos, discos o memorias externas, etc. 
+❗️Por otro lado dependiendo del proyecto que queramos llevar acabo vamos a necesitar instalar o configurar otro tipo de software y hardware: Bases de datos, discos o memorias externas, etc. 
 
 **MySQL** y **PhpMyAdmin** suelen ser buenas alternativas. **MongoDB** es una buena solución para bases de datos escalables.
 
-Este software suele actualizarse con frecuencia y considero que ya hay buenas guias y foros donde explican su instalación. 
 
-☢️Apache acepta muchas configuraciones y ofrece muchas posibilidades, como sitios virtuales, control de acceso, etc. 
+☢️ Apache acepta muchas configuraciones y ofrece muchas posibilidades, como sitios virtuales, control de acceso, etc. 
 
 ## 4. Abriendo el servidor. 
 En este apartado abriremos nuestro dispositivo al mundo para poder acceder a nuestra pagina web o a nuestro servidor desde cualquier parte.
@@ -297,7 +306,7 @@ En mi caso usaré uno dominio gratuito de [No-IP](https://www.noip.com/) .
 #### Pasos: 
 Lo primero que tenemos que hacer es dirigirnos a la [página](https://www.noip.com/) de No-IP i registrarnos. Una vez tengamos nuestra cuenta creada y accedamos al panel de nuestra cuenta (en dashboard) veremos un widget llamado "Quick Add". 
 
-![enter image description here](https://i.imgur.com/jZNCAWa.png)
+![enter image description here](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/4.png)
 
 Podemos elegir el dominio y el hostname que queramos siempre que este disponible. Este hostname y dominio será la futura URL que introduciremos en nuestro navegador para acceder al servidor apache que hemos instalando anteriormente. 
 
@@ -327,7 +336,7 @@ Todos estos comandos tienen que ser ejecutados en el terminal en el que tengamos
 
 Para descargar el paquete en nuestra Raspberry y no en nuestro ordenador. Podemos copiar el enlace de descarga y después usar el comando `wget`. 
 
-![enter image description here](https://i.imgur.com/kLQzGQS.png)
+![enter image description here](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/5.png)
 
  Antes de ejecutar este comando seria interesante dirigirse en el directorio que se nos pide que se descargue para evitar luego tener que moverlo. 
 Por lo tanto: 
@@ -356,7 +365,7 @@ Esta parte puede ser distinta según el router que estemos configurando. Pero b�
 
 La configuración que nos encontraremos será algo parecido a esto: 
 
-![enter image description here](https://www.howtogeek.com/wp-content/uploads/2016/10/ximg_5817561cd906a.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.27Jtigz8-2.jpg)
+![enter image description here](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/6.png)
 
 El funcionamiento es simple. La conexiones que entren en un determinado puerto por `from` tienen que ser redirigidas hacia la `IP Address` de nuestra Raspberry, con el mismo puerto por `to`, siempre que este no haya sido configurado por otro, que no debería ser nuestro caso. 
 
@@ -374,7 +383,7 @@ Lo mismo sucedería con las conexiones SSH que se realizan por el puerto 22.
 
 Por lo tanto tras configurar la conexiones web y las conexiones SSH tendría que quedarnos algo así: 
 
-![enter image description here](https://www.howtogeek.com/wp-content/uploads/2016/10/ximg_5817561cd906a.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.27Jtigz8-2.jpg)
+![enter image description here](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/7.png)
 
 
 Una vez configurado todo, nuestro servidor ya puede ser accesible desde de donde queramos 🚀.
@@ -408,7 +417,7 @@ Por suerte nuestra existe un genial programa open-source llamado **FireZilla**, 
 
 Una vez instalado y abierto veremos algo similar a esto: 
 
-![](https://i.imgur.com/jvxECLq.png)
+![](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/8.png)
 
 Rellenamos los campos de servidor, nombre de usuario y contraseña:
 
@@ -437,19 +446,10 @@ Por último creamos una contraseña para el usuario
 
     sudo passwd NUEVO-USUARIO-FTP
 
-
-❗️El servicio FTP, al igual que Apache, acepta muchas otras configuraciones, por lo que es posible  hacer un uso más intensivo y personalizado.
+☢️ El servicio FTP, al igual que Apache, acepta muchas otras configuraciones, por lo que es posible  hacer un uso más intensivo y personalizado.
 
 
 ### ➡️ VPN
 🚀 OpenVPN Easy-RSA:
 
 [http://carlini.es/crear-un-servidor-vpn-en-una-raspberry-pi/](http://carlini.es/crear-un-servidor-vpn-en-una-raspberry-pi/)
-
-
-
-
-
-
-
-
