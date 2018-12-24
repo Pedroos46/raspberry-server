@@ -66,7 +66,7 @@ Si usamos **Windows** podemos usar clientes como [Putty](http://www.putty.org/) 
 
 El funcionamiento es exactamente el mismo tanta para Linux y Mac como para Windows. 
 
-Así que volvemos a intentar el commando `ssh`:
+Así que volvemos a intentar el comando `ssh`:
 
 	usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
            [-D [bind_address:]port] [-E log_file] [-e escape_char]
