@@ -70,6 +70,8 @@ If we use **Windows** we can use clients like [Putty](http://www.putty.org/) or 
 The operation is exactly the same for Linux and Mac as for Windows.
 
 So we try the `ssh` command again:
+	
+		
 	usage: ssh [-1246AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
            [-D [bind_address:]port] [-E log_file] [-e escape_char]
            [-F configfile] [-I pkcs11] [-i identity_file]
