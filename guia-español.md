@@ -118,7 +118,7 @@ Una vez lo tengamos, reiniciamos nuestra placa y ya deberia empezar a trabajar c
 	sudo reboot now
 
 
-### ➡️ Mejorar el rendimiento con la asignación de recursos:
+### ➡️ Mejorar el rendimiento reasignando recursos:
 
 La idea es tener trabajando la Raspberry sin necesidad de supervisión y sin ningún periférico conectado. Por lo tanto, podriamos reducir la cantidad de recursos que destinamos al procesamiento gráfico e incluso desactivar la interfaz. 
 
