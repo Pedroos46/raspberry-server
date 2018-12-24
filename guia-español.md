@@ -259,7 +259,7 @@ Una vez lo tengamos actualizamos e instalamos:
 
 Una vez lo tengamos instalado podemos para comprobar como nuestro servidor web esta funcionando insertando la IP de nuestro servidor en el navegador de nuestro equipo. 
 
-Esta conexión se realiza por defecto en el puerto 80.
+Esta conexión (HTTP) se realiza por defecto en el puerto 80. En caso de añadir un certificado SSL y tener una conexión HTTPS se haría por el puerto 443. 
 
 Hasta aquí ya tendríamos un gestor de conexiones HTTP y ya podríamos cagar paginas web. 
 
@@ -374,17 +374,81 @@ Lo mismo sucedería con las conexiones SSH que se realizan por el puerto 22.
 
 Por lo tanto tras configurar la conexiones web y las conexiones SSH tendría que quedarnos algo así: 
 
-!TO-DO: Afegir foto.
+![enter image description here](https://www.howtogeek.com/wp-content/uploads/2016/10/ximg_5817561cd906a.png.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.27Jtigz8-2.jpg)
+
 
 Una vez configurado todo, nuestro servidor ya puede ser accesible desde de donde queramos 🚀.
 
 
 ## 5. VPN, FTP, etc.
-https://www.sitepoint.com/setting-up-a-home-vpn-using-your-raspberry-pi/
+
+Una vez creado un servidor web con SSH y haberlo hecho accesible fuera de su red local, podemos extrapolar todo lo aprendido a otras soluciones, como **por ejemplo** un gestor de ficheros FTP para poder mandar nuestras paginas web al servidor de forma cómoda  o un servidor VPN para poder encapsular nuestras conexiones. 
+
+### ➡️ FTP
+
+Primero vamos a descargar el servidor vsftpd. Este será el encargado de gestionar las conexiones y la transferencia de archivos. 
+
+    sudo apt-get install vsftpd
+
+Una vez que este descargado abrimos el siguiente archivo de configuración.
+
+    sudo nano /etc/vsftpd.conf
+
+Se debe descomentar las siguientes líneas. Estas lineas permiten la escritura de archivos a los usuarios de la Raspberry Pi.
+
+>    local_enable=YES
+>   write_enable=YES
+
+Por último reiniciamos el servicio.
+
+    sudo service vsftpd restart
+
+Ahora ya tenemos el servicio de servidor instalado. Ahora procedemos a instalar el cliente. 
+Por suerte nuestra existe un genial programa open-source llamado **FireZilla**, procedemos a [descargarlo](https://filezilla-project.org/) e instalarlo.
+
+Una vez instalado y abierto veremos algo similar a esto: 
+
+![](https://i.imgur.com/jvxECLq.png)
+
+Rellenamos los campos de servidor, nombre de usuario y contraseña:
+
+-   servidor :  [IP de la Raspberry] o [URL]
+-   nombre de usuario: [pi] o [nuevo-usuario]
+-   contraseña: la contraseña del usuario.
+
+En cuando hayamos establecido la conexión, transferir archivos es tan fácil como arrastrar y soltar.
+
+⚠️ Si queremos realizar conexiones usando nuestro hostname o nuestra URL tendremos que **habilitar en el router la redirección del puerto  por defecto en conexiones FTP, el 21** , ya que repito, las conexiones que realizamos usando el hostname se hacen con la IP publica y por lo tanto requieren una redirección para llegar a la IP local de la Raspberry. 
 
 
-	sudo apt-get install openvpn easy-rsa
-http://carlini.es/crear-un-servidor-vpn-en-una-raspberry-pi/
+👨‍👩‍👧‍👦 Si queremos usar nuestro servidor FTP con varias cuentas, pero no queremos que estas tengan acceso total podemos crear un usuario nuevo en nuestro sistema y otorgarle solo permisos en ciertas carpetas o en un directorio principal. Una forma muy básica de hacerlo seria así: 
+
+    sudo useradd NUEVO-USUARIO-FTP
+
+Creamos una carpeta en la cual el geekyuser podrá crear todos los directorios que quiera.
+
+    sudo mkdir /home/NUEVO-USUARIO-FTP
+
+Damos permisos al usuario creado.
+
+    sudo chown NUEVO-USUARIO-FTP:users /home/NUEVO-USUARIO-FTP
+
+Por último creamos una contraseña para el usuario
+
+    sudo passwd NUEVO-USUARIO-FTP
+
+
+❗️El servicio FTP, al igual que Apache, acepta muchas otras configuraciones, por lo que es posible  hacer un uso más intensivo y personalizado.
+
+
+### ➡️ VPN
+🚀 OpenVPN Easy-RSA:
+
+[http://carlini.es/crear-un-servidor-vpn-en-una-raspberry-pi/](http://carlini.es/crear-un-servidor-vpn-en-una-raspberry-pi/)
+
+
+
+
 
 
 
