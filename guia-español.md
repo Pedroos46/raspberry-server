@@ -1,5 +1,5 @@
 
-Guia de creación de un servidor Raspberry Pi Zero en español.
+Guía de creación de un servidor Raspberry Pi Zero en español.
 
 ## Tabla de contenidos: 
 1. [Preparación](https://github.com/Pedroos46/raspberry-server/blob/master/guia-espa%C3%B1ol.md#1-preparaci%C3%B3n)
