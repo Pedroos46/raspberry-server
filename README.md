@@ -1,5 +1,5 @@
 # Rapsberry Pi Zero Server
-Guía hecha por mi y para mi sobre como armar y configurar una Raspberry Zero como servidor.
+Guía hecha por mi para mi, sobre como armar y configurar una Raspberry Zero como servidor.
 
 
 
