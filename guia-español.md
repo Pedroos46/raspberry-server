@@ -184,7 +184,7 @@ Este proceso puede tardar un rato. Cuando haya terminado reinciamos nuestro serv
 	sudo reboot now
     
 ### ➡️ Certificados de autenticación en SSH:
- Comodo 🔑
+ Cómodo 🔑
  
 En este punto queremos establecer conexiones SSH sin necesidad de introducir la contraseña.  Para ello crearemos certificados de autenticación y los intercambiaremos entre los dos dispositivos. 
 
