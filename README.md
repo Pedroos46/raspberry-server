@@ -7,6 +7,6 @@ Disponible en:
 
 [🇪🇸Español](https://github.com/Pedroos46/raspberry-server/blob/master/guia-espa%C3%B1ol.md) 
 
-🐈Català
+[🐈Català](https://github.com/Pedroos46/raspberry-server/blob/master/guia-catala.md)
 
-🇬🇧English
+[🇬🇧English](https://github.com/Pedroos46/raspberry-server/blob/master/guia-english.md)
