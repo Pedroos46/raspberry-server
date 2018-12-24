@@ -81,7 +81,7 @@ De momento solo realizaremos una simple conexión con el servidor.
 Para hacerlo necesitamos **el usuario** de nuestro servidor, en el caso de la Raspberry el usuario por defecto es `pi`, **la IP**  de nuestra placa y **la contraseña** del usuario, que en el caso de las Raspberry la contraseña por defecto para el usuario `pi` es `raspberry`.
 
 	ssh [usuario]@[ip o hostname]
-Por lo tanto:s
+Por lo tanto:
 
     ssh pi@[ip]
     password: raspberry
@@ -115,9 +115,9 @@ Deberemos añadir las lineas que hay más abajo. Es probable que `iface xxxx ine
       address 192.168.1.180
       gateway 192.168.1.1
       
-En donde pone `address` podremos la IP estática que queremos. No estaría de más entrar en nuestro router para saber que rango de IPs podemos entrarle y cual es el `gateway` ya que esto suele estar sujeto al router que tengamos. 
+En donde pone `address` pondremos la IP estática que queremos. No estaría de más entrar en nuestro router para saber que rango de IPs podemos entrarle y cual es el `gateway` ya que esto suele estar sujeto al router que tengamos. 
 
-Nota:  Normalmente `wlan0` es la interfaz  que se usa con conexión wifi. Si nuestra conexión es por ethernet normalmente la interfaz es `eth0`. Siempre podemos mirar que interfaz estamos usando con el comando `ifconfig`.
+❗️ Normalmente `wlan0` es la interfaz  que se usa con conexión wifi. Si nuestra conexión es por ethernet normalmente la interfaz es `eth0`. Siempre podemos mirar que interfaz estamos usando con el comando `ifconfig`.
 
 Para más información y para otra versiones de Linux se puede vistar la siguiente [pàgina](https://www.linode.com/docs/networking/linux-static-ip-configuration).
 
@@ -156,7 +156,7 @@ Posteriormente le reduciremos la memoria a la GPU asignándole `16`.
 
 Recomendado ✅
 
-Por motivos de seguridad no podemos dejar nuestro usuario por defecto habilitado. Por lo que crearemos uno nuevo y lo eliminaremos:
+Por motivos de seguridad no podemos dejar nuestro usuario por defecto habilitado. Por lo que crearemos uno nuevo y eliminaremos el que va por defecto:
 
 Para crearlos usaremos el siguiente comando, el cual contiene también los grupos de sistema al cual queremos que este. 
 
@@ -187,7 +187,7 @@ Los siguientes comandos actualizarán, no solo el software de nuestro dispositiv
     sudo apt-get upgrade
     sudo apt-get dist-upgrade
     
-Este proceso puede tardar un rato. Cuando haya terminado reinciamos nuestro servidor:
+Este proceso puede tardar un rato. Cuando haya terminado reiniciamos nuestro servidor:
 
 	sudo reboot now
     
@@ -338,7 +338,7 @@ Para descargar el paquete en nuestra Raspberry y no en nuestro ordenador. Podemo
 
 ![enter image description here](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/5.png)
 
- Antes de ejecutar este comando seria interesante dirigirse en el directorio que se nos pide que se descargue para evitar luego tener que moverlo. 
+Antes de ejecutar este comando seria interesante dirigirse en el directorio que se nos pide que se descargue para evitar luego tener que moverlo. 
 Por lo tanto: 
  
 
@@ -406,7 +406,8 @@ Una vez que este descargado abrimos el siguiente archivo de configuración.
 Se debe descomentar las siguientes líneas. Estas lineas permiten la escritura de archivos a los usuarios de la Raspberry Pi.
 
 >    local_enable=YES
->   write_enable=YES
+>
+>    write_enable=YES
 
 Por último reiniciamos el servicio.
 
