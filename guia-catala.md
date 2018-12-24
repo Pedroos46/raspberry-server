@@ -2,11 +2,11 @@
 Guia de creació d'un servidor Raspberry Pi Zero en català.
 
 ## Taula de continguts:
-1. [Preparació](https://github.com/Pedroos46/raspberry-server/blob/master/guia-espa%C3%B1ol.md#1-preparaci%C3%B3n)
-2. [Recomanacions](https://github.com/Pedroos46/raspberry-server/blob/master/guia-espa%C3%B1ol.md#2-recomendaciones)
-3. [Configuració local](https://github.com/Pedroos46/raspberry-server/blob/master/guia-espa%C3%B1ol.md#3-empezando-a-nivel-local)
-4. [Obrint el servidor](https://github.com/Pedroos46/raspberry-server/blob/master/guia-espa%C3%B1ol.md#4-abriendo-el-servidor)
-5. [VPN, FTP, etc](https://github.com/Pedroos46/raspberry-server/blob/master/guia-espa%C3%B1ol.md#5-vpn-ftp-etc)
+1. [Preparació](https://github.com/Pedroos46/raspberry-server/blob/master/guia-catala.md#1-preparaci%C3%B3)
+2. [Recomanacions](https://github.com/Pedroos46/raspberry-server/blob/master/guia-catala.md#2-recomanacions)
+3. [Configuració local](https://github.com/Pedroos46/raspberry-server/blob/master/guia-catala.md#3-comen%C3%A7ant-a-nivell-local)
+4. [Obrint el servidor](https://github.com/Pedroos46/raspberry-server/blob/master/guia-catala.md#4-obrint-el-servidor)
+5. [VPN, FTP, etc](https://github.com/Pedroos46/raspberry-server/blob/master/guia-catala.md#5-vpn-ftp-etc)
 
 
 
