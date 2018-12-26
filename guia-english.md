@@ -265,16 +265,17 @@ This measure is completely optional and relatively simple to implement. To use F
 
 ## 3. Beginning at the local level.
 
-Se️ It could be said that until now, from point 1 to 2, all we have done is a quick start of our plate. At this point is when we start to mount the server, in this case a web server based on Apache in which we can host web pages.
+It could be said that until now, from point 1 to 2, all we have done is a quick start of our plate. At this point is when we start to mount the server, in this case a web server based on Apache in which we can host web pages.
 
 Once we have everything configured, we will start creating and configuring our server. As we have created the SSH server, we will create the web server.
 
 One of the best known solutions for servers is Web Apache, which is the one I will use in this guide.
+
 😮 There are other solutions such as Nginx, but they are not as configurable or easy to install, although in certain environments they are more recommendable than Apache.
 
 We open an SSH connection with our Raspberry with the user `pi`o` NEW-USER` and we can start with the installation.
 
-Before moving on to the installation, what we will do is create the "www-data" group. For this we will execute the following commands:
+Before moving on to the installation, what we'll do is create the "www-data" group. For this we will execute the following commands:
 
     sudo groupadd www-data
 	sudo usermod -a -G www-data www-data
@@ -290,11 +291,11 @@ Once we have it installed we can check how our web server is working inserting t
 
 ❗️ This connection (HTTP) is done by default on port 80. In case of adding an SSL certificate and having an HTTPS connection it would be done through port 443.
 
-So far we would have an HTTP connection manager and we could already shred web pages.
+So far we would have an HTTP connection manager, and we could already store web pages on it.
 
-Nowadays Javascript is the most extended language to create dynamic content in web environments, besides it allows a good separation of client-server. Even so, there are other alternatives such as **PHP**.
+❗️ Nowadays Javascript is the most extended language to create dynamic content in web environments, besides it allows a good separation of client-server. Even so, there are other alternatives such as **PHP**.
 
-P️On the other hand depending on the project that we want to carry out we will need to install or configure another type of software and hardware: Databases, disks or external memories, etc.
+On the other hand depending on the project that we want to carry out we will need to install or configure another type of software and hardware: Databases, disks or external memories, etc.
 
 **MySQL** and **PhpMyAdmin** are usually good alternatives. **MongoDB** is a good solution for scalable databases.
 
@@ -305,7 +306,7 @@ P️On the other hand depending on the project that we want to carry out we will
 ## 4. Opening the server.
 In this section we will open our device to the world to access our website or our server from anywhere.
 
-This point can be ignored if we only want a local server.
+This point can be ignored if we only want a local server.🌍
 
 We will use a free domain and the service [**Dyndns**](https://es.wikipedia.org/wiki/DNS_din%C3%A1mico) makes it easier for us to have a domain name assigned to a dynamic public IP. The procedure would be similar with a domain of its own as well.
 
@@ -318,7 +319,7 @@ In this way we can access from outside the network the team of our internal netw
 ### ➡️ No-IP.
 In my case I will use a free domain of [No-IP](https://www.noip.com/).
 
-❗️ No-IP offers payment services. I will use only the **Free Dynamic DNS** plan, which allows me to have up to 3 dominos for free, although not personalized.
+❗️ No-IP offers payment services. I will use only the **Free Dynamic DNS** plan, which allows me to have up to 3 domains for free, although not personalized.
 
 ❗️ In case of having a domain of its own this would have to be transferred to No-IP. You can also buy domains through them. All these procedures are subject to charges, in the same way as the mail manager, SSL certificates, backups, etc.
 
@@ -359,8 +360,8 @@ To download the package in our Raspberry and not in our computer. We can copy th
 
 ![enter image description here](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/5.png)
 
-Before executing this command it would be interesting to go to the directory that we are asked to download to avoid having to move it.
-Thus:
+Before executing this command it would be interesting to go to the directory that we are asked to download to avoid having to move it later.
+Therefore:
  
 
     cd /usr/local/src
@@ -382,13 +383,13 @@ Once this process is finished, we must proceed to open the ports that interest u
 
 ❗️ Make sure we have **access to the router control panel** for port redirection.
 
-Once inside the control panel of the router, we go to the option that says **Port Forwarding** or **Redirection of Ports**.
+Once inside the control panel of the router, we go to the option that says **Port Forwarding**.
 
 This part may be different depending on the router we are configuring. But basically what we have to do is redirect the ports.
 
 The configuration that we will find will be something similar to this: 
 
-![enter image description here](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/6.png)
+![](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/6.png)
 
 
 The operation is simple. The connections that enter a certain port from `from` have to be redirected to the `IP Address` of our Raspberry, with the same port by `to`, as long as it has not been configured by another, which should not be our case.
@@ -407,7 +408,7 @@ The same would happen with the SSH connections that are made by port 22.
 
 Therefore, after configuring the web connections and the SSH connections, we should have something like this:
 
-![enter image description here](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/7.png)
+![](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/7.png)
 
 
 Once everything is configured, our server can now be accessed from wherever we want 🚀.
