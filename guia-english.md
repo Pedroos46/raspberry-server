@@ -183,7 +183,7 @@ Once, created the new user we closed the current SSH connection by typing `exit`
 
 	ssh NUEVO-USUARIO@[ip o hostname]
     
-Once inside we will eliminate the user by default and all your data. In this case the Raspberry is `pi`, if we have another username there is put that user.
+Once inside we will eliminate the user by default and all your data. In this case the Raspberry is `pi`, if we have another username there we'll put that user.
  
  	sudo deluser --remove-all-files pi	
 	sudo userdel -r -f pi
