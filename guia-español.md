@@ -45,12 +45,15 @@ Este archivo debe contener los siguientes detalles:
  country=COUNTRY
  ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
  update_config=1
+ 
  network={
         ssid="SSID"
-        psk="PASSWORD"
+        psk="CONTRASEÑA"
         key_mgmt=WPA-PSK
      }
 ```
+La entrada COUNTRY corresponde a las dos letras ISO de cada país, por ejemplo: ES, US, GB, FR, etc.
+
 Colocando este archivo aquí Raspbian lo moverá  a **/etc/wpa_supplicant/** cuando el sistema arranque.
 
 Para **habilitar el SSH** crearemos en el mismo directorio "boot" un archivo llamado **ssh** sin ninguna extensión. 
