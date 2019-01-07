@@ -50,7 +50,7 @@ Aquest arxiu ha de contenir el seguent:
  
  network={
         ssid="SSID"
-        psk="CONTRASEÑA"
+        psk="CONTRASENYA"
         key_mgmt=WPA-PSK
      }
 ```
