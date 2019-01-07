@@ -35,14 +35,26 @@ Per **configurar la connexió WiFi** ens dirigim en el volum "boot" de la target
 
 ![Creamos el archivo wpa_supplicant.conf](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/1.png)
 
-Aquest fitxer ha de contenir els següents detalls:
+També podem utilitzar el terminal:
+
 ```bash
-network={
-    ssid="NETWORK_NAME"
-    psk="NETWORK_PASSWORD"
-    key_mgmt=WPA-PSK
-}
+    cd /Volumes/boot  
+    nano `wpa_supplicant.conf`
 ```
+Aquest arxiu ha de contenir el seguent: 
+
+ ```bash
+ country=COUNTRY
+ ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+ update_config=1
+ 
+ network={
+        ssid="SSID"
+        psk="CONTRASEÑA"
+        key_mgmt=WPA-PSK
+     }
+```
+L'entrada COUNTRY correspont a les lletre ISO de cada pais, per exemple: ES, US, GB, FR, etc.
 
 Col·locant aquest arxiu aquí Raspbian el mourà a **/etc/wpa_supplicant/** quan el sistema arranqui.
 
