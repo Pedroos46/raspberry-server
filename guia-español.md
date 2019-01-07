@@ -33,13 +33,23 @@ Para **configurar la conexión WiFi** nos dirigimos en el volumen "boot" de la t
 
 ![Creamos el archivo wpa_supplicant.conf](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/1.png)
 
-Este archivo debe contener los siguientes detalles: 
+Podemos usar también el terminal:
+
 ```bash
-network={
-    ssid="NETWORK_NAME"
-    psk="NETWORK_PASSWORD"
-    key_mgmt=WPA-PSK
-}
+    cd /Volumes/boot  
+    nano `wpa_supplicant.conf`
+```
+Este archivo debe contener los siguientes detalles: 
+
+ ```bash
+ country=COUNTRY
+ ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+ update_config=1
+ network={
+        ssid="SSID"
+        psk="PASSWORD"
+        key_mgmt=WPA-PSK
+     }
 ```
 Colocando este archivo aquí Raspbian lo moverá  a **/etc/wpa_supplicant/** cuando el sistema arranque.
 
