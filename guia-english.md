@@ -35,14 +35,26 @@ To **configure the WiFi connection** we go to the "boot" volume of the SD card w
 ![Creamos el archivo wpa_supplicant.conf](https://raw.githubusercontent.com/Pedroos46/raspberry-server/master/resources/1.png)
 
 
-This file must contain the following details:
+We can also use terminal: 
+
 ```bash
-network={
-    ssid="NETWORK_NAME"
-    psk="NETWORK_PASSWORD"
-    key_mgmt=WPA-PSK
-}
+    cd /Volumes/boot  
+    nano `wpa_supplicant.conf`
 ```
+This file must contain the following details:
+
+ ```bash
+ country=COUNTRY
+ ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+ update_config=1
+ 
+ network={
+        ssid="SSID"
+        psk="PASSWORD"
+        key_mgmt=WPA-PSK
+     }
+```
+Where COUNTRY should be set the two letter ISO country name, for example: ES, US, GB, FR, etc.
 Placing this file here, Raspbian will move it to **/etc/wpa_supplicant/** when the system boots.
 
 To **enable the SSH** we will create in the same directory "boot" a file called **ssh** without any extension.
