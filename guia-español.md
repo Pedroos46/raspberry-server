@@ -65,6 +65,10 @@ Podemos usar el comando `touch` desde el terminal para agilizar la creación de 
 
     touch ssh
 
+https://medium.com/@aallan/setting-up-a-headless-raspberry-pi-zero-3ded0b83f274 
+
+FALTA LA CONFIGURACIÓ OTG
+
 ### ➡️ Empezando con SSH
 
 Una vez iniciada la Raspberry y el sistema lo primero que tenemos que saber es la IP que se le ha asignado para poder establecer conexión. 
